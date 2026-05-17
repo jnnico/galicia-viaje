@@ -9,6 +9,7 @@
   *{box-sizing:border-box} body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);margin:0;background:#f4f7f9;line-height:1.45}
   header{background:linear-gradient(135deg,#0f4c81,#2f6f5e);color:#fff;padding:34px 42px 28px;margin-bottom:24px}
   header h1{margin:0 0 8px;font-size:30px;line-height:1.15} header p{margin:0;max-width:980px;font-size:15px;opacity:.95}
+  .lang-switch{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.lang-switch a{display:inline-flex;align-items:center;gap:7px;border:1px solid #ffffff80;border-radius:999px;color:#fff;text-decoration:none;padding:6px 11px;font-size:13px;font-weight:700;background:#ffffff1c}.lang-switch a.active{background:#fff;color:#0f4c81}
   main{max-width:1120px;margin:0 auto;padding:0 20px 36px}
   .note{background:#fff;border-left:6px solid var(--blue);padding:16px 18px;margin:0 0 24px;border-radius:10px;box-shadow:0 3px 12px #00000012}
   .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.pill{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;background:#e8eef3;color:#223}
@@ -28,6 +29,10 @@
 <header>
   <h1>Galicia desde Carnota: listado visual con pros y contras</h1>
   <p>Base del viaje: 74 Aldea Carballal, 15292 Carnota. Perfil: familia de 7 personas, con bebé, niños y una persona mayor que camina poco. Se han excluido los lugares ya visitados: Catedral de Santiago, Cíes, Combarro, Torre de Hércules, Cabo Fisterra, barco mejillonero y bodega de Fefiñanes.</p>
+  <nav class="lang-switch" aria-label="Cambiar idioma">
+    <a class="active" href="index.html" lang="es" aria-current="page">🇪🇸 Español</a>
+    <a href="index-fr.html" lang="fr">🇫🇷 Français</a>
+  </nav>
 </header>
 <main>
   <section class="note">
