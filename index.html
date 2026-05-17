@@ -37,7 +37,7 @@
 
   <section class="vote-panel" id="votacion">
     <h2>Votacion familiar</h2>
-    <p class="small">Cada persona escribe su nombre y puntua cada sitio del 1 al 5. Los votos se guardan en este navegador y el ranking se actualiza automaticamente.</p>
+    <p class="small">Cada persona escribe su nombre y puntua cada sitio del 1 al 5. Los votos se guardan en una Google Sheet compartida y el ranking se actualiza automaticamente.</p>
     <div class="vote-controls">
       <div>
         <label for="voterName">Quien esta votando</label>
@@ -211,10 +211,11 @@
 <footer>
   Documento preparado para uso familiar. Las imágenes se cargan desde fuentes web enlazadas; para conservarlas al imprimir, abre el archivo con conexión a internet y usa “Imprimir / Guardar como PDF”.
 </footer>
+<script src="config.js"></script>
 <script>
 (function(){
-  var STORAGE_KEY = "galiciaCarnotaVotos";
   var VOTER_KEY = "galiciaCarnotaVotante";
+  var API_URL = (window.GALICIA_VOTES_API_URL || "").trim();
   var scores = [1, 2, 3, 4, 5];
   var cards = Array.prototype.slice.call(document.querySelectorAll("article.card"));
   var voterInput = document.getElementById("voterName");
@@ -223,7 +224,8 @@
   var voteStatus = document.getElementById("voteStatus");
   var rankingResults = document.getElementById("rankingResults");
   var currentVoter = localStorage.getItem(VOTER_KEY) || "";
-  var votes = loadVotes();
+  var votes = {};
+  var loading = false;
   var places = cards.map(function(card, index){
     var title = card.querySelector("h2");
     var kicker = card.querySelector(".kicker");
@@ -246,27 +248,18 @@
   if (saveVoter) saveVoter.addEventListener("click", setCurrentVoter);
   if (resetVotes) {
     resetVotes.addEventListener("click", function(){
-      if (!confirm("Seguro que quieres borrar todos los votos guardados en este navegador?")) return;
-      votes = {};
-      saveVotes();
-      renderAll();
+      if (!API_URL) {
+        voteStatus.textContent = "Configura primero la URL de Apps Script en config.js.";
+        return;
+      }
+      if (!confirm("Seguro que quieres borrar todos los votos guardados en la Google Sheet?")) return;
+      sendToApi({ action: "reset" }).then(loadRemoteVotes);
     });
   }
 
   addVotingBoxes();
   renderAll();
-
-  function loadVotes(){
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    } catch (error) {
-      return {};
-    }
-  }
-
-  function saveVotes(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
-  }
+  loadRemoteVotes();
 
   function setCurrentVoter(){
     currentVoter = (voterInput.value || "").trim();
@@ -312,10 +305,23 @@
       voterInput.focus();
       return;
     }
-    if (!votes[placeId]) votes[placeId] = {};
-    votes[placeId][currentVoter] = score;
-    saveVotes();
+    if (!API_URL) {
+      voteStatus.textContent = "Falta conectar la Google Sheet: pega la URL del Apps Script en config.js.";
+      return;
+    }
+    var place = places.find(function(item){ return item.id === placeId; });
+    setVoteLocally(placeId, currentVoter, score);
     renderAll();
+    voteStatus.textContent = "Guardando voto de " + currentVoter + "...";
+    sendToApi({
+      action: "vote",
+      place_id: placeId,
+      place_name: place ? place.name : placeId,
+      voter: currentVoter,
+      score: score
+    }).then(loadRemoteVotes).catch(function(){
+      voteStatus.textContent = "No se pudo guardar ahora mismo. Revisa la conexion o la URL de Apps Script.";
+    });
   }
 
   function clearVote(placeId){
@@ -324,21 +330,35 @@
       voterInput.focus();
       return;
     }
-    if (votes[placeId]) {
-      delete votes[placeId][currentVoter];
-      if (Object.keys(votes[placeId]).length === 0) delete votes[placeId];
-      saveVotes();
-      renderAll();
+    if (!API_URL) {
+      voteStatus.textContent = "Falta conectar la Google Sheet: pega la URL del Apps Script en config.js.";
+      return;
     }
+    clearVoteLocally(placeId, currentVoter);
+    renderAll();
+    voteStatus.textContent = "Quitando voto de " + currentVoter + "...";
+    sendToApi({
+      action: "delete",
+      place_id: placeId,
+      voter: currentVoter
+    }).then(loadRemoteVotes).catch(function(){
+      voteStatus.textContent = "No se pudo quitar ahora mismo. Revisa la conexion o la URL de Apps Script.";
+    });
   }
 
   function renderAll(){
     renderCards();
     renderRanking();
     var voterCount = getVoters().length;
-    voteStatus.textContent = currentVoter
-      ? "Votando como " + currentVoter + ". Votantes registrados: " + voterCount + "."
-      : "Escribe un nombre para empezar a votar.";
+    if (!API_URL) {
+      voteStatus.textContent = "Falta conectar la Google Sheet. Pega la URL del Apps Script en config.js.";
+    } else if (loading) {
+      voteStatus.textContent = "Cargando votos compartidos...";
+    } else {
+      voteStatus.textContent = currentVoter
+        ? "Votando como " + currentVoter + ". Votantes registrados: " + voterCount + "."
+        : "Escribe un nombre para empezar a votar.";
+    }
   }
 
   function renderCards(){
@@ -405,6 +425,73 @@
       });
     });
     return Object.keys(names);
+  }
+
+  function setVoteLocally(placeId, voter, score){
+    if (!votes[placeId]) votes[placeId] = {};
+    votes[placeId][voter] = score;
+  }
+
+  function clearVoteLocally(placeId, voter){
+    if (!votes[placeId]) return;
+    delete votes[placeId][voter];
+    if (Object.keys(votes[placeId]).length === 0) delete votes[placeId];
+  }
+
+  function loadRemoteVotes(){
+    if (!API_URL) {
+      renderAll();
+      return Promise.resolve();
+    }
+    loading = true;
+    renderAll();
+    return jsonp(API_URL, { action: "list" }).then(function(data){
+      votes = {};
+      (data.votes || []).forEach(function(row){
+        if (!row.place_id || !row.voter) return;
+        setVoteLocally(row.place_id, row.voter, Number(row.score));
+      });
+      loading = false;
+      renderAll();
+    }).catch(function(){
+      loading = false;
+      voteStatus.textContent = "No se pudieron cargar los votos compartidos. Revisa la URL de Apps Script.";
+    });
+  }
+
+  function sendToApi(payload){
+    return fetch(API_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+  }
+
+  function jsonp(url, params){
+    return new Promise(function(resolve, reject){
+      var callbackName = "galiciaVotesCallback_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+      var script = document.createElement("script");
+      var query = Object.keys(params || {}).map(function(key){
+        return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
+      });
+      query.push("callback=" + encodeURIComponent(callbackName));
+      query.push("_=" + Date.now());
+      window[callbackName] = function(data){
+        cleanup();
+        resolve(data || {});
+      };
+      script.onerror = function(){
+        cleanup();
+        reject(new Error("JSONP request failed"));
+      };
+      script.src = url + (url.indexOf("?") === -1 ? "?" : "&") + query.join("&");
+      document.body.appendChild(script);
+      function cleanup(){
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+      }
+    });
   }
 
   function escapeHtml(value){
