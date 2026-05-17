@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galicia desde Carnota - ranking visual con pros y contras</title>
+<style>
+  :root{--ink:#1f2933;--muted:#65707c;--blue:#0f4c81;--soft:#eef6fb;--green:#2f6f5e;--amber:#9a6b00;--red:#9a3412;--line:#d8e0e7;--card:#ffffff;}
+  *{box-sizing:border-box} body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);margin:0;background:#f4f7f9;line-height:1.45}
+  header{background:linear-gradient(135deg,#0f4c81,#2f6f5e);color:#fff;padding:34px 42px 28px;margin-bottom:24px}
+  header h1{margin:0 0 8px;font-size:30px;line-height:1.15} header p{margin:0;max-width:980px;font-size:15px;opacity:.95}
+  main{max-width:1120px;margin:0 auto;padding:0 20px 36px}
+  .note{background:#fff;border-left:6px solid var(--blue);padding:16px 18px;margin:0 0 24px;border-radius:10px;box-shadow:0 3px 12px #00000012}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.pill{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;background:#e8eef3;color:#223}
+  .pill.high{background:#e4f5ec;color:#14532d}.pill.medium{background:#fff4d6;color:#704800}.pill.special{background:#e6efff;color:#1e3a8a}.pill.no{background:#ffe7df;color:#7c2d12}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:22px 0;box-shadow:0 6px 18px #00000012;page-break-inside:avoid}
+  .card-grid{display:grid;grid-template-columns:360px 1fr;min-height:260px}.photo{background:#dfe7ed;min-height:260px;position:relative}.photo img{width:100%;height:100%;object-fit:cover;display:block}.photo small{position:absolute;left:10px;bottom:8px;background:#0009;color:#fff;border-radius:6px;padding:4px 7px;font-size:10px;max-width:92%}
+  .content{padding:20px 22px}.kicker{font-weight:700;color:var(--blue);font-size:12px;text-transform:uppercase;letter-spacing:.04em}.content h2{margin:5px 0 8px;font-size:22px}.meta{font-size:13px;color:var(--muted);margin-bottom:12px}.desc{font-size:14px;color:#374151;margin:0 0 13px;background:#f8fafc;border-left:4px solid #d7e7f2;padding:9px 11px;border-radius:8px}.verdict{font-weight:700;margin:10px 0 14px;padding:9px 12px;border-radius:10px;background:var(--soft)}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.box h3{margin:0 0 8px;font-size:15px}.box.pro h3{color:var(--green)}.box.con h3{color:var(--red)} ul{margin:0;padding-left:19px} li{margin:4px 0}.tip{margin-top:12px;font-size:13px;color:#374151;border-top:1px dashed var(--line);padding-top:10px}.src{font-size:11px;color:var(--muted);margin-top:8px}.src a{color:#315f88;text-decoration:none}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px #00000010;margin:16px 0 28px} th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top} th{background:#eef6fb;color:#123} .small{font-size:13px;color:var(--muted)}
+  footer{padding:22px 20px;color:#667085;font-size:12px;text-align:center}.print-note{display:none}
+  .vote-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin:0 0 24px;box-shadow:0 6px 18px #00000012}.vote-panel h2{margin:0 0 8px;font-size:22px}.vote-controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:10px;align-items:end;margin:14px 0}.vote-controls label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}.vote-controls input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}.vote-btn,.score-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}.vote-btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.vote-btn.danger{color:#7c2d12;background:#fff7f4}.vote-status{font-size:13px;color:var(--muted);margin-top:8px}.vote-card{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}.vote-card h3{margin:0 0 8px;font-size:15px;color:var(--blue)}.score-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.score-btn{min-width:38px}.score-btn.active{background:#e4f5ec;border-color:#7cc7a1;color:#14532d}.score-btn.clear{color:#7c2d12}.vote-summary{font-size:13px;color:var(--muted);margin-top:8px}.results-list{display:grid;gap:10px;margin-top:14px}.result-item{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fbfdff}.result-rank{font-weight:800;color:var(--blue);font-size:18px}.result-name{font-weight:800}.result-meta{font-size:12px;color:var(--muted);margin-top:2px}.result-score{font-weight:800;text-align:right}.bar{height:7px;background:#e8eef3;border-radius:999px;overflow:hidden;margin-top:7px}.bar span{display:block;height:100%;background:linear-gradient(90deg,#2f6f5e,#0f4c81);border-radius:999px}.empty-results{color:var(--muted);font-size:14px;background:#f8fafc;border:1px dashed var(--line);border-radius:12px;padding:12px;margin-top:12px}
+  @media(max-width:800px){.card-grid{grid-template-columns:1fr}.photo{height:230px}.cols{grid-template-columns:1fr}header{padding:28px 22px}.content h2{font-size:20px}.vote-controls{grid-template-columns:1fr}.result-item{grid-template-columns:34px 1fr}.result-score{grid-column:2;text-align:left}}
+  @media print{body{background:#fff}header{border-radius:0}.card{box-shadow:none;break-inside:avoid}.note{box-shadow:none}.print-note{display:block}.src a{color:#333;text-decoration:none}main{max-width:100%;padding:0 10px}.photo{min-height:210px}.card-grid{grid-template-columns:300px 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Galicia desde Carnota: listado visual con pros y contras</h1>
+  <p>Base del viaje: 74 Aldea Carballal, 15292 Carnota. Perfil: familia de 7 personas, con bebé, niños y una persona mayor que camina poco. Se han excluido los lugares ya visitados: Catedral de Santiago, Cíes, Combarro, Torre de Hércules, Cabo Fisterra, barco mejillonero y bodega de Fefiñanes.</p>
+</header>
+<main>
+  <section class="note">
+    <strong>Criterio de decisión:</strong> prioridad a sitios cercanos a Carnota, con paseos cortos, miradores accesibles en coche, opciones de descanso y poca exigencia física. Ons se incluye como “día especial” porque os apetece conocerla, aunque exige más logística.
+    <div class="legend"><span class="pill high">Muy recomendable</span><span class="pill medium">Opcional</span><span class="pill special">Día especial</span><span class="pill no">Mejor descartar</span></div>
+  </section>
+
+  <section class="vote-panel" id="votacion">
+    <h2>Votacion familiar</h2>
+    <p class="small">Cada persona escribe su nombre y puntua cada sitio del 1 al 5. Los votos se guardan en este navegador y el ranking se actualiza automaticamente.</p>
+    <div class="vote-controls">
+      <div>
+        <label for="voterName">Quien esta votando</label>
+        <input id="voterName" type="text" placeholder="Ej.: Ana, Abuelo, Nico" autocomplete="off">
+      </div>
+      <button class="vote-btn primary" type="button" id="saveVoter">Usar nombre</button>
+      <button class="vote-btn danger" type="button" id="resetVotes">Borrar votos</button>
+    </div>
+    <div class="vote-status" id="voteStatus">Escribe un nombre para empezar a votar.</div>
+    <div id="rankingResults" class="results-list" aria-live="polite"></div>
+  </section>
+
+  <table>
+    <thead><tr><th>Ranking</th><th>Sitio</th><th>Valoración rápida</th><th>Encaje con vuestro grupo</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Ézaro + mirador</td><td>Imprescindible</td><td>Muy alto</td></tr>
+      <tr><td>2</td><td>Muros + Louro</td><td>Imprescindible</td><td>Muy alto</td></tr>
+      <tr><td>3</td><td>Carnota + Lira + Caldebarcos</td><td>Día colchón perfecto</td><td>Muy alto</td></tr>
+      <tr><td>4</td><td>Muxía + Cabo Vilán + Camariñas</td><td>Muy recomendable</td><td>Alto, vigilando viento y seguridad</td></tr>
+      <tr><td>5</td><td>Vimianzo + Dombate</td><td>Cultural y cómodo</td><td>Alto</td></tr>
+      <tr><td>6</td><td>Isla de Ons</td><td>Día especial opcional</td><td>Medio-alto, con logística</td></tr>
+      <tr><td>7</td><td>Noia + Central del Tambre</td><td>Tranquilo y diferente</td><td>Medio-alto</td></tr>
+      <tr><td>8</td><td>Corrubedo + Axeitos</td><td>Alternativa natural</td><td>Medio</td></tr>
+      <tr><td>9</td><td>A Pobra + A Curota</td><td>Solo con día despejado</td><td>Medio</td></tr>
+      <tr><td>10</td><td>Romería Vikinga de Catoira</td><td>Especial, pero exigente</td><td>Medio-bajo para bebé/senior</td></tr>
+    </tbody>
+  </table>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/1/0/1/9/8/5_9182b3f37352d92/101985scr_75d0c08e091f5ce.jpg" alt="Pasarela de la Fervenza do Ézaro"><small>Fervenza do Ézaro - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">1 · Muy recomendable</div><h2>Ézaro + Mirador de Ézaro</h2><div class="meta">Tipo: naturaleza fácil · Distancia: muy cerca de Carnota · Duración ideal: medio día</div><p class="desc">La Fervenza do Ézaro es uno de los paisajes más llamativos cerca de Carnota: el río Xallas cae junto al mar y el mirador permite ver la desembocadura desde arriba. Es atractivo porque ofrece una postal muy potente sin exigir una ruta larga.</p><p class="verdict">Veredicto: imprescindible. Mucha recompensa visual con poco esfuerzo físico.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Cerca de vuestra casa.</li><li>Cascada espectacular y visita corta.</li><li>Buen plan para niños, adultos y mayores.</li><li>El mirador se puede hacer en coche.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>En agosto puede llenarse.</li><li>Suelo húmedo o resbaladizo junto a la cascada.</li><li>Aparcamiento complicado en horas punta.</li><li>Conviene comprobar el estado de pasarelas/accesos antes de ir.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> ir temprano o a última hora de la tarde. Evitar mediodía.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/210518000497/fervenza-do-ezaro?langId=es_ES&tp=40004370">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://tse3.mm.bing.net/th/id/OIP.Hh6AgP5Ubh59oBGZyZpOFwHaE7?pid=Api" alt="Playa de Carnota"><small>Playa de Carnota - imagen representativa</small></div>
+      <div class="content"><div class="kicker">2 · Muy recomendable</div><h2>Carnota + Lira + Caldebarcos</h2><div class="meta">Tipo: entorno local · Distancia: inmediata · Duración ideal: día suave o tarde</div><p class="desc">Es el entorno inmediato de vuestra casa: playas abiertas, aldeas marineras, hórreos y restaurantes cercanos. Atractivo porque permite disfrutar de Galicia sin prisas y sin cargar al grupo con coche.</p><p class="verdict">Veredicto: imprescindible como día colchón. Perfecto para descansar sin renunciar a ver cosas.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Cero estrés logístico.</li><li>Hórreos de Carnota y Lira.</li><li>Playas, puerto y ambiente marinero.</li><li>Ideal con bebé y mayores.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>La arena cansa a quien camina poco.</li><li>No es una excursión “de gran impacto”.</li><li>Puede hacer viento.</li><li>Hay que elegir bien acceso a playa y aparcamiento.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> usarlo como día flexible si una jornada anterior resulta pesada.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/que-visitar/espazos-naturais/zonas-de-proteccion-e-lugares-de-interese/carnota-e-monte-pindo?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/imaxes/mdaw/mdy1/~edisp/~extract/TURGA065257~1~staticrendition/tg_carrusel_cabecera_grande.jpg" alt="Hórreo de Carnota"><small>Hórreo de Carnota - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">3 · Visita corta</div><h2>Hórreo de Carnota</h2><div class="meta">Tipo: patrimonio etnográfico · Distancia: inmediata · Duración ideal: 30-45 min</div><p class="desc">Uno de los grandes símbolos etnográficos de la zona, junto a la iglesia, el palomar y el conjunto tradicional. Es atractivo porque se visita rápido, es llano y sirve como primera toma de contacto con Carnota.</p><p class="verdict">Veredicto: visita obligada de llegada o de mañana tranquila.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Muy cerca de la casa.</li><li>Visita llana y breve.</li><li>Buena para fotos familiares.</li><li>No exige reserva ni gasto relevante.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>No ocupa mucho tiempo.</li><li>Puede coincidir con más visitantes en horas punta.</li><li>Necesita combinarse con playa, Lira o comida cercana.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> combinar con compra de empanada/conservas o paseo corto por Carnota.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/16452/conxunto-de-horreo-e-pombal-de-carnota?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://images.openai.com/static-rsc-4/vT9qq6IZwzKN0BtmDjKUJq-F79hckSYEo-mPzy90gZjoOkknHhJ_RMvOTbMf1r8ewKocKc8s0P7EqSYIzgrlNRI0sb9ZSTMzkXAWDWYhTBXn9vtcv-XRBttJdKTg_kYevnNZeiJILuI8pVtsWxI6FPnBJO_bg6u_ZEkmIpRtAfc?purpose=inline" alt="Muros"><small>Muros - imagen representativa</small></div>
+      <div class="content"><div class="kicker">4 · Muy recomendable</div><h2>Muros + Louro</h2><div class="meta">Tipo: villa marinera + playa/vistas · Distancia: cercana · Duración ideal: medio día largo</div><p class="desc">Muros es una villa marinera con puerto, soportales y casas tradicionales; Louro añade paisaje de playa y monte junto al mar. Atrae por su mezcla de paseo cómodo, comida marinera y ambiente auténtico.</p><p class="verdict">Veredicto: imprescindible desde Carnota. Bonito, cercano y gastronómico.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Paseo portuario cómodo.</li><li>Soportales, terrazas y buen pescado.</li><li>Se combina con Louro sin complicarse.</li><li>Buen plan si queréis comer bien.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Calles interiores con piedra y pequeñas pendientes.</li><li>Aparcar puede costar en agosto.</li><li>Mejor evitar meterse por zonas altas con el senior.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> centrarse en puerto, casco bajo y comida. Louro como paseo/fotos, no sendero.</p><p class="src">Fuente orientativa: <a href="https://www.turismo.gal/que-visitar/rias-e-praias/ria-de-muros-e-noia?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/imaxes/mdaw/mdq1/~edisp/~extract/TURGA045778~1~staticrendition/tg_carrusel_cabecera_grande.jpg" alt="Santuario da Virxe da Barca en Muxía"><small>Muxía - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">5 · Muy recomendable</div><h2>Muxía + Santuario da Virxe da Barca</h2><div class="meta">Tipo: Costa da Morte · Distancia: media · Duración ideal: medio día o día combinado</div><p class="desc">Muxía combina santuario, rocas, mar abierto y ambiente de Costa da Morte. Es atractivo porque transmite fuerza atlántica y paisaje salvaje sin necesidad de hacer una caminata larga.</p><p class="verdict">Veredicto: muy recomendable si el tiempo acompaña. Paisaje de mar y granito muy potente.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Muy diferente a Fisterra, aunque comparte ambiente atlántico.</li><li>Se puede aparcar relativamente cerca.</li><li>Visita fotogénica y emocionante.</li><li>Buena para adultos y niños si se controla el paseo.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Viento frecuente.</li><li>Rocas y zonas abiertas: vigilar niños.</li><li>No conviene con temporal o lluvia fuerte.</li><li>No añadir demasiadas paradas al mismo día.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> llevar chaqueta incluso en agosto. Paseo corto y prudente.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/4943/santuario-da-virxe-da-barca-e-pedras-da-barca?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/imaxes/mdaw/mzq3/~edisp/~extract/TURGA347415~1~staticrendition/tg_carrusel_cabecera_grande.jpg" alt="Cabo Vilán"><small>Cabo Vilán - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">6 · Muy recomendable</div><h2>Cabo Vilán + Camariñas</h2><div class="meta">Tipo: faro + artesanía · Distancia: media · Duración ideal: combinado con Muxía</div><p class="desc">Cabo Vilán es uno de los faros más escénicos de la Costa da Morte y Camariñas conserva la tradición del encaje de bolillos. Atractivo por unir paisaje de acantilado y artesanía local.</p><p class="verdict">Veredicto: ideal como complemento de Muxía, con parada en Camariñas para encaje.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Faro y paisaje espectaculares.</li><li>Visita breve, sin necesidad de ruta larga.</li><li>Camariñas permite comprar encaje auténtico.</li><li>Buen contraste cultural y paisajístico.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Zona expuesta y ventosa.</li><li>Precaución con niños en miradores/acantilados.</li><li>Algunos firmes pueden ser irregulares.</li><li>Mejor no sumarlo a más paradas largas.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> si el día está gris o ventoso, priorizar Muxía y Camariñas, y valorar Cabo Vilán sobre la marcha.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/6676/cabo-vilan?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/imaxes/mdaw/mti1/~edisp/~extract/TURGA125295~1~staticrendition/tg_carrusel_cabecera_grande.jpg" alt="Castillo de Vimianzo"><small>Castillo de Vimianzo - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">7 · Muy recomendable</div><h2>Castillo de Vimianzo</h2><div class="meta">Tipo: cultura familiar · Distancia: media · Duración ideal: 1,5-2 h</div><p class="desc">Fortaleza medieval bien conservada y pensada para una visita familiar, con artesanía en vivo en temporada. Es atractivo para los niños porque permite imaginar castillos, torres y oficios tradicionales.</p><p class="verdict">Veredicto: plan cultural muy bueno para alternar con costa y playa.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Atractivo para niños.</li><li>Patio y artesanía en vivo en temporada.</li><li>Buena alternativa si el tiempo sale gris.</li><li>No depende de marea ni de playa.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Torres y zonas altas con escaleras.</li><li>El senior puede tener que quedarse en patio/zonas bajas.</li><li>Menos paisajístico que Ézaro o Muxía.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> combinarlo con Dolmen de Dombate. No cargar el día con más visitas.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/6714/castelo-torres-de-vimianzo?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/imaxes/mdaw/mti1/~edisp/~extract/TURGA125669~1~staticrendition/tg_carrusel_cabecera_grande.jpg" alt="Dolmen de Dombate"><small>Dolmen de Dombate - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">8 · Recomendable</div><h2>Dolmen de Dombate</h2><div class="meta">Tipo: arqueología cubierta · Distancia: media · Duración ideal: 45-75 min</div><p class="desc">Yacimiento megalítico musealizado y protegido, ideal para entender la prehistoria gallega sin andar por terreno complicado. Atractivo porque es una visita cultural breve, cubierta y diferente.</p><p class="verdict">Veredicto: complemento perfecto del Castillo de Vimianzo.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Visita corta, cómoda y cubierta.</li><li>Buena con clima gris o calor.</li><li>Muy interesante si os gusta la historia.</li><li>Menos exigente que castros al aire libre.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>No llena un día por sí solo.</li><li>Puede parecer breve para niños pequeños.</li><li>Conviene combinarlo con Vimianzo o Laxe.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> hacerlo después del castillo y antes de volver a Carnota.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/17282/dolmen-de-dombate?ctre=66&langId=es_ES&tp=11">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/1/0/5/6/6/1_70f2dcb6c39b1bd/105661scr_f11c06b92d82ba6.jpg" alt="Isla de Ons"><small>Isla de Ons - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">9 · Día especial</div><h2>Isla de Ons</h2><div class="meta">Tipo: isla + barco · Distancia: larga desde Carnota · Duración ideal: día completo</div><p class="desc">Isla del Parque Nacional das Illas Atlánticas, más habitada y marinera que Cíes, con playas, puerto y restaurantes. Es atractiva porque os da una experiencia nueva de isla gallega, barco y comida junto al mar.</p><p class="verdict">Veredicto: sí, si os hace ilusión de verdad. Es el capricho del viaje, no el día más cómodo.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Alternativa nueva a Cíes.</li><li>Experiencia marinera y especial para niños.</li><li>Zona baja del puerto más manejable que rutas largas.</li><li>Restaurantes y ambiente isleño.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Coche hasta puerto + ferry + reservas.</li><li>Autorización previa en temporada alta.</li><li>Carrito poco útil fuera del pueblo/zona baja.</li><li>Rutas al faro o miradores con pendientes: no aptas para todos.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> hacer versión tranquila: desembarco, paseo corto, playa cercana y comida. Mochila portabebés mejor que carrito.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/32108/illa-de-ons?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/1/0/9/1/6/4_638b749540a7385/109164scr_149868eb2eac300.jpg" alt="Noia"><small>Noia - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">10 · Recomendable</div><h2>Noia + Central del Tambre</h2><div class="meta">Tipo: casco histórico + naturaleza tranquila · Distancia: media · Duración ideal: medio día largo</div><p class="desc">Noia aporta casco histórico y tradición marinera; la Central del Tambre suma arquitectura de Antonio Palacios y entorno verde junto al río. Atractivo porque es un plan más tranquilo y distinto a playa/faros.</p><p class="verdict">Veredicto: buen día tranquilo, distinto a playa y faros.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Casco histórico interesante.</li><li>Buena gastronomía y empanada.</li><li>Central del Tambre como pausa verde.</li><li>Buen plan con lluvia suave si se combina con comida larga.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Noia tiene empedrado y zonas irregulares.</li><li>La Central pierde encanto con lluvia fuerte.</li><li>No añadiría Castro de Baroña con movilidad reducida.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> Noia en versión corta + Tambre para café/merienda.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso?cod_rec=21410&langId=es_ES">Turismo de Galicia</a> · <a href="https://www.turismo.gal/recurso/-/detalle/16460/central-electrica-do-tambre?langId=es_ES">Central del Tambre</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/9/6/0/4/5_a969843c893e90b/96045scr_d809cd56061c8f9.jpg" alt="Central eléctrica do Tambre"><small>Central del Tambre - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">11 · Complemento tranquilo</div><h2>Central Hidroeléctrica del Tambre</h2><div class="meta">Tipo: arquitectura + entorno verde · Distancia: media · Duración ideal: 45-90 min</div><p class="desc">Conjunto histórico-industrial en un entorno natural muy agradable, vinculado a la arquitectura de Antonio Palacios. Atractivo como pausa verde, fotogénica y relajada tras visitar Noia.</p><p class="verdict">Veredicto: muy buen complemento a Noia, especialmente para descansar.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Entorno bonito y diferente.</li><li>Menos masificado que otros puntos.</li><li>Buen lugar para pausa, café o fotos.</li><li>No exige grandes caminatas.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Plan más contemplativo que infantil.</li><li>Depende del estado del acceso y servicios.</li><li>Con lluvia fuerte pierde atractivo.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> llevarlo como plan de tarde suave tras comer en Noia.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/16460/central-electrica-do-tambre?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/1/0/8/0/6/7_d4dc1f1c03d16e0/108067scr_2c9e36a61d0fd4d.jpg" alt="Corrubedo"><small>Corrubedo - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">12 · Opcional</div><h2>Corrubedo + Dolmen de Axeitos</h2><div class="meta">Tipo: dunas + prehistoria · Distancia: media-larga · Duración ideal: medio día largo</div><p class="desc">Corrubedo ofrece dunas, lagunas y pasarelas en un paisaje muy distinto al de Carnota; Axeitos añade una parada megalítica breve. Atractivo si queréis naturaleza diferente sin barco.</p><p class="verdict">Veredicto: buena alternativa si no hacéis Ons.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Paisaje dunar diferente.</li><li>Pasarelas para evitar arena en parte del recorrido.</li><li>Dolmen de Axeitos como parada breve.</li><li>Plan natural sin barco ni autorización.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Más coche que Muros o Ézaro.</li><li>Poca sombra: calor duro en agosto.</li><li>Viento frecuente.</li><li>No conviene caminar por arena con movilidad reducida.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> hacerlo temprano. Si el día está muy caluroso, descartarlo.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/9617/complexo-dunar-de-corrubedo-e-lagoas-de-carregal-e-vixan?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/8/1/5/3/3_eb76b855cbf6572/81533scr_3611f61596660fb.jpg" alt="Mirador de A Curota"><small>A Curotiña / A Curota - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">13 · Opcional</div><h2>A Pobra do Caramiñal + A Curota</h2><div class="meta">Tipo: paseo marítimo + mirador · Distancia: media-larga · Duración ideal: medio día</div><p class="desc">A Pobra permite paseo marítimo y comida tranquila; A Curota ofrece una gran panorámica de la ría de Arousa desde altura. Atractivo si buscáis vistas amplias sin hacer senderismo.</p><p class="verdict">Veredicto: solo con día despejado. Si hay niebla, pierde sentido.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Vistas enormes de la ría de Arousa.</li><li>Se llega en coche hasta las inmediaciones.</li><li>A Pobra permite paseo y comida tranquila.</li><li>Buen plan si queréis cambiar de zona.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>La parte alta del mirador no es aconsejable para movilidad reducida.</li><li>Carretera de subida y posible viento.</li><li>Sin visibilidad no merece la pena.</li><li>No es tan prioritario como Ézaro o Muros.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> mirar previsión y visibilidad antes de decidir.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/10899/mirador-de-a-curota?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/1/2/0/5/5/0_7ad14ecaee6463a/120550scr_60e03013ebe008c.jpg" alt="Romería Vikinga de Catoira"><small>Romería Vikinga de Catoira - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">14 · Especial, pero exigente</div><h2>Romería Vikinga de Catoira</h2><div class="meta">Tipo: fiesta popular · Fecha probable: primer domingo de agosto · Duración ideal: solo mañana/mediodía</div><p class="desc">Fiesta popular con desembarco vikingo, mercado, música y ambiente medieval. Es atractiva porque coincide con vuestras fechas y puede ser una experiencia muy diferente para los niños mayores.</p><p class="verdict">Veredicto: plan muy singular, pero delicado con bebé y movilidad reducida.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Evento único y muy diferente.</li><li>Ambiente medieval, barcos y comida popular.</li><li>Puede entusiasmar a niños mayores.</li><li>Coincide con vuestras fechas.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Aglomeraciones, calor y ruido.</li><li>Aparcamiento y baños complicados.</li><li>Zona de desembarco con barro/marisma: mala para carrito y senior.</li><li>Requiere “plan de retirada” si el grupo se cansa.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> si vais, quedaos en zonas altas/asfaltadas y no busquéis primera línea.</p><p class="src">Fuente imagen/información: <a href="https://www.turismo.gal/recurso/-/detalle/fi-po-000014/romaria-viquinga-de-catoira?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <section class="note">
+    <h2>Destinos que dejaría fuera desde Carnota</h2>
+    <p class="small">Los siguientes sitios son interesantes, pero no los recomiendo como plan principal con base fija en Carnota, bebé y una persona mayor que camina poco. Los dejo en formato ficha, igual que el resto, para que se vea claramente por qué quedan fuera.</p>
+  </section>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://termasoutariz.com/images/verano_3.jpg" alt="Termas de Outariz en Ourense"><small>Termas de Outariz - imagen del complejo termal</small></div>
+      <div class="content"><div class="kicker">Mejor descartar desde Carnota</div><h2>Ourense termal</h2><div class="meta">Tipo: ciudad termal + relax · Distancia: muy larga desde Carnota · Encaje: bajo como ida y vuelta</div><p class="desc">Ourense es la gran ciudad termal de Galicia, con pozas, paseos junto al Miño y casco histórico. Es atractivo para relajarse, pero desde Carnota queda demasiado lejos para una excursión cómoda.</p><p class="verdict">Veredicto: no lo metería como excursión diaria. Solo tendría sentido con noche fuera o como parada estratégica de regreso.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Plan relajante para adultos y mayores.</li><li>Termas, paseo fluvial y casco histórico.</li><li>Buena gastronomía de interior.</li><li>Puede ser muy agradable si se duerme en Ourense.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Demasiadas horas de coche desde Carnota para ir y volver.</li><li>En agosto puede hacer mucho calor.</li><li>Con bebé hay que revisar normas de acceso y temperaturas de las pozas.</li><li>Rompe la lógica cómoda del viaje con base en Costa da Morte.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> dejarlo para otro viaje o usarlo solo si decidís hacer una noche fuera de la casa.</p><p class="src">Fuente imagen: <a href="https://termasoutariz.com/gal_verano.html">Termas de Outariz</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.catamaranesribeirasacra.com/uploads/1/8/8/2/18820118/espirit-rs-1d.jpg" alt="Ribeira Sacra y Cañón del Sil"><small>Ribeira Sacra - imagen representativa de operador local</small></div>
+      <div class="content"><div class="kicker">Mejor descartar desde Carnota</div><h2>Ribeira Sacra</h2><div class="meta">Tipo: cañones, catamarán y vino · Distancia: muy larga desde Carnota · Encaje: bajo como ida y vuelta</div><p class="desc">Territorio de cañones fluviales, viñedos en pendiente, miradores y catamaranes por el Sil. Es uno de los paisajes interiores más espectaculares de Galicia, pero exige otra base logística.</p><p class="verdict">Veredicto: preciosa, pero no compensa desde Carnota con vuestro grupo.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Uno de los paisajes de interior más espectaculares de Galicia.</li><li>El catamarán permite disfrutar sentado, sin caminar demasiado.</li><li>Buena gastronomía y vinos de la zona.</li><li>Muy buen destino para otro viaje con base en Ourense o Monforte.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Excursión demasiado larga en coche desde Carnota.</li><li>Mucho tiempo de carretera para bebé y senior.</li><li>Miradores y accesos no siempre son cómodos.</li><li>Obliga a sacrificar planes cercanos mucho más lógicos.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> guardarla para una escapada específica de Ribeira Sacra, durmiendo allí o en Ourense.</p><p class="src">Fuente imagen: <a href="https://www.catamaranesribeirasacra.com/">Catamaranes Ribeira Sacra</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.turismo.gal/osdam/filestore/4/0/2/9_c109fb6a0a3d11e/4029scr_fb3be59c982b9bf.jpg" alt="Playa de As Catedrais"><small>Praia das Catedrais - Turismo de Galicia</small></div>
+      <div class="content"><div class="kicker">Mejor descartar desde Carnota</div><h2>Lugo / Ribadeo / Playa de las Catedrales</h2><div class="meta">Tipo: ciudad histórica + costa cantábrica · Distancia: muy larga desde Carnota · Encaje: bajo</div><p class="desc">Lugo ofrece muralla romana y tapeo; Ribadeo y Catedrales aportan costa cantábrica y arcos rocosos únicos. Son muy atractivos, pero quedan demasiado alejados de Carnota y Catedrales exige marea y accesos poco cómodos.</p><p class="verdict">Veredicto: lo dejaría fuera. Es un plan magnífico, pero pertenece a otra ruta por Lugo y A Mariña.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Lugo tiene una muralla romana única y muy buena gastronomía.</li><li>Ribadeo y Rinlo son buenos puntos para comer y pasear.</li><li>La Playa de las Catedrales es espectacular.</li><li>Puede ser un viaje precioso si se duerme por Lugo/A Mariña.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Muy lejos desde Carnota para ida y vuelta.</li><li>Las Catedrales dependen de marea baja y autorización en temporada alta.</li><li>Bajar a la playa implica escaleras, arena húmeda y terreno irregular.</li><li>Demasiado cansancio acumulado para bebé y persona con movilidad limitada.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> no meterlo en este viaje. Mejor reservarlo para una ruta futura por Lugo, Ribadeo, Mondoñedo y A Mariña.</p><p class="src">Fuente imagen: <a href="https://www.turismo.gal/que-visitar/destacados/praia-das-catedrais?langId=es_ES">Turismo de Galicia</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://s1.elespanol.com/2024/07/05/treintayseis/vivir/868173597_247549925_1024x576.jpg" alt="Baiona y Ría de Vigo"><small>Baiona - imagen representativa</small></div>
+      <div class="content"><div class="kicker">Mejor descartar desde Carnota</div><h2>Baiona / A Guarda / Tui / Vigo</h2><div class="meta">Tipo: Ría de Vigo y Baixo Miño · Distancia: muy larga desde Carnota · Encaje: bajo</div><p class="desc">Zona sur de Galicia con villas históricas, frontera con Portugal, miradores sobre el Miño, playas urbanas y ambiente marinero. Es atractiva para otro viaje con base en Vigo o Baiona, no para ir y volver desde Carnota.</p><p class="verdict">Veredicto: buenos destinos, pero no con Carnota como base fija.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Baiona tiene paseo marítimo, puerto y ambiente familiar.</li><li>A Guarda y Santa Trega ofrecen vistas muy potentes.</li><li>Tui tiene un casco histórico interesante.</li><li>Vigo/Samil es cómodo si se está alojado en la zona.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Quedan demasiado al sur para una excursión familiar desde Carnota.</li><li>Mucho coche para el bebé y la persona mayor.</li><li>Tui tiene cuestas y empedrado.</li><li>Vigo puede añadir tráfico, aparcamiento y más estrés logístico.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> dejarlos para otro viaje con base en Vigo, Baiona o Nigrán.</p><p class="src">Fuente imagen: <a href="https://www.elespanol.com/treintayseis/vivir/20240713/guarda-tui-municipio-bonito-cerca-vigo-chatgpt/868163367_0.html">Treintayseis / El Español</a></p></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-grid">
+      <div class="photo"><img src="https://www.paxinasgalegas.es/fiestas/paseo-maritimo-de-o-grove-o-grove_img20957n1t0.jpg" alt="Paseo marítimo de O Grove"><small>O Grove - imagen representativa</small></div>
+      <div class="content"><div class="kicker">Mejor descartar salvo capricho</div><h2>Pontevedra / O Grove / A Toxa</h2><div class="meta">Tipo: Rías Baixas · Distancia: media-larga desde Carnota · Encaje: medio-bajo</div><p class="desc">Pontevedra es cómoda y peatonal; O Grove y A Toxa aportan marisco, paseos y ambiente de Rías Baixas. Son atractivos, pero desde Carnota quedan como día largo y además parte de la experiencia se solapa con lo ya conocido.</p><p class="verdict">Veredicto: no son malos planes, pero no los pondría por delante de Costa da Morte, Muros-Noia u Ons.</p><div class="cols"><div class="box pro"><h3>Pros</h3><ul><li>Pontevedra es una ciudad muy agradable y bastante cómoda.</li><li>O Grove y A Toxa tienen buena gastronomía marinera.</li><li>A Toxa ofrece paseos llanos y plan familiar.</li><li>Puede encajar si queréis un día de Rías Baixas.</li></ul></div><div class="box con"><h3>Contras</h3><ul><li>Desde Carnota supone un desplazamiento considerable.</li><li>En agosto puede haber saturación turística.</li><li>Ya habéis hecho planes similares en Rías Baixas: barco mejillonero, Combarro y Fefiñanes.</li><li>Ons, si os apetece, es una opción más especial que repetir zona.</li></ul></div></div><p class="tip"><strong>Consejo:</strong> solo lo haría si descartáis Ons y os apetece mucho una jornada de Rías Baixas. Si no, mejor quedarse en planes cercanos.</p><p class="src">Fuente imagen: <a href="https://www.paxinasgalegas.es/fiestas/paseo-maritimo-de-o-grove-20957.html">Páxinas Galegas</a></p></div>
+    </div>
+  </article>
+
+  <section class="note">
+    <p class="small"><strong>Selección final recomendada:</strong> Ézaro, Muros/Louro, Carnota/Lira/Caldebarcos, Muxía/Cabo Vilán/Camariñas, Vimianzo/Dombate, Ons y Noia/Tambre. Si descartáis Ons, sustituir por Corrubedo + Axeitos.</p>
+  </section>
+</main>
+<footer>
+  Documento preparado para uso familiar. Las imágenes se cargan desde fuentes web enlazadas; para conservarlas al imprimir, abre el archivo con conexión a internet y usa “Imprimir / Guardar como PDF”.
+</footer>
+<script>
+(function(){
+  var STORAGE_KEY = "galiciaCarnotaVotos";
+  var VOTER_KEY = "galiciaCarnotaVotante";
+  var scores = [1, 2, 3, 4, 5];
+  var cards = Array.prototype.slice.call(document.querySelectorAll("article.card"));
+  var voterInput = document.getElementById("voterName");
+  var saveVoter = document.getElementById("saveVoter");
+  var resetVotes = document.getElementById("resetVotes");
+  var voteStatus = document.getElementById("voteStatus");
+  var rankingResults = document.getElementById("rankingResults");
+  var currentVoter = localStorage.getItem(VOTER_KEY) || "";
+  var votes = loadVotes();
+  var places = cards.map(function(card, index){
+    var title = card.querySelector("h2");
+    var kicker = card.querySelector(".kicker");
+    var id = "place-" + (index + 1);
+    card.dataset.placeId = id;
+    return {
+      id: id,
+      name: title ? title.textContent.trim() : "Sitio " + (index + 1),
+      category: kicker ? kicker.textContent.trim() : "",
+      card: card
+    };
+  });
+
+  if (voterInput) {
+    voterInput.value = currentVoter;
+    voterInput.addEventListener("keydown", function(event){
+      if (event.key === "Enter") setCurrentVoter();
+    });
+  }
+  if (saveVoter) saveVoter.addEventListener("click", setCurrentVoter);
+  if (resetVotes) {
+    resetVotes.addEventListener("click", function(){
+      if (!confirm("Seguro que quieres borrar todos los votos guardados en este navegador?")) return;
+      votes = {};
+      saveVotes();
+      renderAll();
+    });
+  }
+
+  addVotingBoxes();
+  renderAll();
+
+  function loadVotes(){
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveVotes(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+  }
+
+  function setCurrentVoter(){
+    currentVoter = (voterInput.value || "").trim();
+    localStorage.setItem(VOTER_KEY, currentVoter);
+    renderAll();
+  }
+
+  function addVotingBoxes(){
+    places.forEach(function(place){
+      var content = place.card.querySelector(".content");
+      if (!content) return;
+      var box = document.createElement("div");
+      box.className = "vote-card";
+      box.innerHTML = '<h3>Votar este sitio</h3><div class="score-row" role="group" aria-label="Puntuacion de ' + escapeHtml(place.name) + '"></div><div class="vote-summary"></div>';
+      var row = box.querySelector(".score-row");
+      scores.forEach(function(score){
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "score-btn";
+        button.dataset.score = score;
+        button.textContent = score;
+        button.title = score + " de 5";
+        button.addEventListener("click", function(){
+          voteFor(place.id, score);
+        });
+        row.appendChild(button);
+      });
+      var clear = document.createElement("button");
+      clear.type = "button";
+      clear.className = "score-btn clear";
+      clear.textContent = "Quitar";
+      clear.addEventListener("click", function(){
+        clearVote(place.id);
+      });
+      row.appendChild(clear);
+      content.appendChild(box);
+    });
+  }
+
+  function voteFor(placeId, score){
+    if (!currentVoter) {
+      voteStatus.textContent = "Primero escribe el nombre de quien esta votando.";
+      voterInput.focus();
+      return;
+    }
+    if (!votes[placeId]) votes[placeId] = {};
+    votes[placeId][currentVoter] = score;
+    saveVotes();
+    renderAll();
+  }
+
+  function clearVote(placeId){
+    if (!currentVoter) {
+      voteStatus.textContent = "Primero escribe el nombre de quien esta votando.";
+      voterInput.focus();
+      return;
+    }
+    if (votes[placeId]) {
+      delete votes[placeId][currentVoter];
+      if (Object.keys(votes[placeId]).length === 0) delete votes[placeId];
+      saveVotes();
+      renderAll();
+    }
+  }
+
+  function renderAll(){
+    renderCards();
+    renderRanking();
+    var voterCount = getVoters().length;
+    voteStatus.textContent = currentVoter
+      ? "Votando como " + currentVoter + ". Votantes registrados: " + voterCount + "."
+      : "Escribe un nombre para empezar a votar.";
+  }
+
+  function renderCards(){
+    places.forEach(function(place){
+      var userScore = votes[place.id] && currentVoter ? votes[place.id][currentVoter] : null;
+      var buttons = place.card.querySelectorAll(".score-btn[data-score]");
+      buttons.forEach(function(button){
+        button.classList.toggle("active", Number(button.dataset.score) === userScore);
+      });
+      var summary = place.card.querySelector(".vote-summary");
+      if (!summary) return;
+      var stats = getStats(place.id);
+      summary.textContent = stats.count
+        ? "Media: " + stats.average.toFixed(1) + " / 5 con " + stats.count + " voto(s). Total: " + stats.total + "."
+        : "Aun no hay votos para este sitio.";
+    });
+  }
+
+  function renderRanking(){
+    var ranked = places.map(function(place){
+      var stats = getStats(place.id);
+      return Object.assign({}, place, stats);
+    }).filter(function(place){
+      return place.count > 0;
+    }).sort(function(a, b){
+      return b.total - a.total || b.average - a.average || b.count - a.count || a.name.localeCompare(b.name);
+    });
+
+    if (!ranked.length) {
+      rankingResults.className = "empty-results";
+      rankingResults.innerHTML = "Todavia no hay votos. Cuando cada familiar puntue sus favoritos, aqui aparecera el ranking.";
+      return;
+    }
+
+    rankingResults.className = "results-list";
+    rankingResults.innerHTML = ranked.map(function(place, index){
+      var width = Math.min(100, Math.round((place.average / 5) * 100));
+      return '<div class="result-item">'
+        + '<div class="result-rank">#' + (index + 1) + '</div>'
+        + '<div><div class="result-name">' + escapeHtml(place.name) + '</div>'
+        + '<div class="result-meta">' + escapeHtml(place.category) + ' &middot; ' + place.count + ' voto(s) &middot; media ' + place.average.toFixed(1) + '</div>'
+        + '<div class="bar"><span style="width:' + width + '%"></span></div></div>'
+        + '<div class="result-score">' + place.total + ' pts</div>'
+        + '</div>';
+    }).join("");
+  }
+
+  function getStats(placeId){
+    var placeVotes = votes[placeId] || {};
+    var values = Object.keys(placeVotes).map(function(name){ return Number(placeVotes[name]); });
+    var total = values.reduce(function(sum, value){ return sum + value; }, 0);
+    return {
+      count: values.length,
+      total: total,
+      average: values.length ? total / values.length : 0
+    };
+  }
+
+  function getVoters(){
+    var names = {};
+    Object.keys(votes).forEach(function(placeId){
+      Object.keys(votes[placeId] || {}).forEach(function(name){
+        names[name] = true;
+      });
+    });
+    return Object.keys(names);
+  }
+
+  function escapeHtml(value){
+    return String(value).replace(/[&<>"']/g, function(char){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[char];
+    });
+  }
+})();
+</script>
+</body>
+</html>
