@@ -4,10 +4,10 @@
   var isFrench = document.documentElement.lang === "fr";
   var routes = [
     {
-      es: "Carnota, hórreo, Lira y Caldebarcos",
-      fr: "Carnota, grenier, Lira et Caldebarcos",
-      waypoints: ["Hórreo de Carnota, A Coruña", "Lira, Carnota, A Coruña", "Caldebarcos, Carnota, A Coruña"],
-      destination: origin
+      es: "Carnota, hórreos de Carnota y Lira, Portocubelo y Caldebarcos",
+      fr: "Carnota, greniers de Carnota et Lira, Portocubelo et Caldebarcos",
+      waypoints: ["Hórreo de Carnota, A Coruña", "Hórreo de Lira, Carnota", "Portocubelo, Lira"],
+      destination: "Caldebarcos, Carnota"
     },
     {
       es: "Ézaro, Corcubión y Muxía",
@@ -16,15 +16,15 @@
       destination: "Santuario da Virxe da Barca, Muxía"
     },
     {
-      es: "Louro y Muros",
-      fr: "Louro et Muros",
-      waypoints: ["Praia de Louro, Muros", "Porto de Muros, A Coruña"],
+      es: "Faro de Lariño, Louro y Muros",
+      fr: "Phare de Lariño, Louro et Muros",
+      waypoints: ["Faro de Lariño, Carnota", "Praia de Louro, Muros", "Porto de Muros, A Coruña"],
       destination: origin
     },
     {
-      es: "Vimianzo, Dombate, Camariñas y Cabo Vilán",
-      fr: "Vimianzo, Dombate, Camariñas et Cabo Vilán",
-      waypoints: ["Castelo de Vimianzo", "Dolmen de Dombate, Cabana de Bergantiños", "Camariñas, A Coruña"],
+      es: "Vimianzo, Dombate, Cereixo, Camariñas y Cabo Vilán",
+      fr: "Vimianzo, Dombate, Cereixo, Camariñas et Cabo Vilán",
+      waypoints: ["Castelo de Vimianzo", "Dolmen de Dombate, Cabana de Bergantiños", "Porto de Cereixo, Vimianzo"],
       destination: "Faro de Cabo Vilán, Camariñas"
     },
     {
@@ -40,9 +40,9 @@
       destination: origin
     },
     {
-      es: "Romería Vikinga de Catoira",
-      fr: "Fête viking de Catoira",
-      waypoints: ["Torres de Oeste, Catoira"],
+      es: "Hórreo do Araño y Romería Vikinga de Catoira",
+      fr: "Grenier d'O Araño et Fête viking de Catoira",
+      waypoints: ["Hórreo do Araño, Rianxo", "Torres de Oeste, Catoira"],
       destination: origin
     }
   ];
