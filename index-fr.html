@@ -17,7 +17,8 @@
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.box h3{margin:0 0 8px;font-size:15px}.box.pro h3{color:var(--green)}.box.con h3{color:var(--red)} ul{margin:0;padding-left:19px} li{margin:4px 0}.tip{margin-top:12px;font-size:13px;color:#374151;border-top:1px dashed var(--line);padding-top:10px}.src{font-size:11px;color:var(--muted);margin-top:8px}.src a{color:#315f88;text-decoration:none}
   table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px #00000010;margin:16px 0 28px} th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top} th{background:#eef6fb;color:#123}.small{font-size:13px;color:var(--muted)} footer{padding:22px 20px;color:#667085;font-size:12px;text-align:center}
   .vote-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin:0 0 24px;box-shadow:0 6px 18px #00000012}.vote-panel h2{margin:0 0 8px;font-size:22px}.vote-controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:10px;align-items:end;margin:14px 0}.vote-controls label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px}.vote-controls input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}.vote-btn,.score-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}.vote-btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.vote-btn.danger{color:#7c2d12;background:#fff7f4}.vote-status{font-size:13px;color:var(--muted);margin-top:8px}.vote-card{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}.vote-card h3{margin:0 0 8px;font-size:15px;color:var(--blue)}.score-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.score-btn{min-width:38px}.score-btn.active{background:#e4f5ec;border-color:#7cc7a1;color:#14532d}.score-btn.clear{color:#7c2d12}.vote-summary{font-size:13px;color:var(--muted);margin-top:8px}.results-list{display:grid;gap:10px;margin-top:14px}.result-item{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fbfdff}.result-rank{font-weight:800;color:var(--blue);font-size:18px}.result-name{font-weight:800}.result-meta{font-size:12px;color:var(--muted);margin-top:2px}.result-score{font-weight:800;text-align:right}.bar{height:7px;background:#e8eef3;border-radius:999px;overflow:hidden;margin-top:7px}.bar span{display:block;height:100%;background:linear-gradient(90deg,#2f6f5e,#0f4c81);border-radius:999px}.empty-results{color:var(--muted);font-size:14px;background:#f8fafc;border:1px dashed var(--line);border-radius:12px;padding:12px;margin-top:12px}
-  @media(max-width:800px){.card-grid{grid-template-columns:1fr}.photo{height:230px}.cols{grid-template-columns:1fr}header{padding:28px 22px}.content h2{font-size:20px}.vote-controls{grid-template-columns:1fr}.result-item{grid-template-columns:34px 1fr}.result-score{grid-column:2;text-align:left}}
+  .itinerary{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 24px;box-shadow:0 6px 18px #00000012}.itinerary h2{margin:0 0 6px}.day-plan{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}.day-plan:first-of-type{margin-top:14px}.day-label{font-weight:800;color:var(--blue);font-size:18px}.day-plan h3{margin:0 0 5px;font-size:17px}.day-plan p{margin:4px 0;font-size:14px}.day-plan .why{color:var(--muted);font-size:13px}.plan-alert{background:#fff4d6;border-left:4px solid var(--amber);padding:10px 12px;border-radius:8px;margin-top:12px;font-size:13px}
+  @media(max-width:800px){.card-grid{grid-template-columns:1fr}.photo{height:230px}.cols{grid-template-columns:1fr}header{padding:28px 22px}.content h2{font-size:20px}.vote-controls{grid-template-columns:1fr}.result-item{grid-template-columns:34px 1fr}.result-score{grid-column:2;text-align:left}.day-plan{grid-template-columns:1fr;gap:4px}table{display:block;max-width:100%;overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -33,6 +34,43 @@
   <section class="note">
     <h2>Hébergement à Pedrafigueira</h2>
     <p class="small"><strong>Maison avec jardin :</strong> logement entier pour 8 personnes maximum, avec 4 chambres, 6 lits, cuisine, wifi, lave-linge, stationnement gratuit et accès proche de la plage. L’emplacement reste très pratique pour organiser les excursions depuis Carnota. <a href="https://www.airbnb.fr/rooms/1307219365521659290?unique_share_id=3bb7a799-047e-4d21-b39d-adf63851ba1e&amp;viralityEntryPoint=1&amp;s=76" target="_blank" rel="noopener noreferrer">Voir le logement sur Airbnb</a>.</p>
+  </section>
+
+  <section class="itinerary" id="plan-dias">
+    <h2>Programme recommandé sur 7 jours</h2>
+    <p class="small">Optimisé à partir des votes de 4 membres de la famille, de la mobilité du groupe et du faible détour de certaines étapes proches. Les jours 2, 5 et 6 sont à permuter selon la météo.</p>
+
+    <div class="day-plan">
+      <div class="day-label">Jour 1</div>
+      <div><h3>Carnota, grenier, Lira et Caldebarcos</h3><p><strong>Matin :</strong> grenier de Carnota et courte promenade dans le village. <strong>Après-midi :</strong> Lira, Caldebarcos et plage par l’accès le plus facile.</p><p class="why">Début tranquille, presque sans voiture, réunissant deux choix très appréciés.</p></div>
+    </div>
+    <div class="day-plan">
+      <div class="day-label">Jour 2</div>
+      <div><h3>Ézaro + Cee/Corcubión + Muxía</h3><p><strong>09:30 :</strong> cascade et belvédère d’Ézaro. <strong>Midi :</strong> repas à Cee ou Corcubión. <strong>Après-midi :</strong> sanctuaire et courte promenade à Muxía.</p><p class="why">Muxía a reçu moins de votes, mais son ajout après Ézaro évite de lui consacrer un autre long trajet.</p></div>
+    </div>
+    <div class="day-plan">
+      <div class="day-label">Jour 3</div>
+      <div><h3>Louro + Muros, après-midi libre</h3><p><strong>Matin :</strong> vues et plage de Louro. <strong>Déjeuner :</strong> port et partie basse de Muros. <strong>Après-midi :</strong> jardin ou plage à Carnota.</p><p class="why">Muros/Louro est le deuxième choix le mieux noté. L’après-midi libre limite la fatigue.</p></div>
+    </div>
+    <div class="day-plan">
+      <div class="day-label">Jour 4</div>
+      <div><h3>Vimianzo + Dombate + Camariñas + Cabo Vilán</h3><p><strong>10:30 :</strong> château de Vimianzo. <strong>12:15 :</strong> dolmen de Dombate. <strong>Déjeuner :</strong> Camariñas. <strong>Après-midi :</strong> Cabo Vilán si le vent reste raisonnable.</p><p class="why">Dombate est moins bien noté mais se trouve sur le même parcours. Le château est gratuit et plaît aux enfants.</p></div>
+    </div>
+    <div class="day-plan">
+      <div class="day-label">Jour 5</div>
+      <div><h3>Île d’Ons</h3><p>Journée complète, de préférence au départ de Portonovo. Version calme : port, petite promenade, plage proche et restaurant réservé, sans longue marche jusqu’au phare.</p><p class="why">Seule destination ayant obtenu 5/5 à l’unanimité. Autorisation préalable obligatoire et billets à acheter dans les 2 heures suivant la pré-réservation.</p></div>
+    </div>
+    <div class="day-plan">
+      <div class="day-label">Jour 6</div>
+      <div><h3>Noia + A Pobra do Caramiñal + A Curota</h3><p><strong>Matin :</strong> courte halte dans la partie basse de Noia. <strong>Déjeuner :</strong> A Pobra. <strong>Après-midi :</strong> belvédère d’A Curota uniquement par bonne visibilité.</p><p class="why">A Curota fait partie des favoris. Noia ajoute patrimoine et gastronomie avec un faible détour.</p></div>
+    </div>
+    <div class="day-plan">
+      <div class="day-label">Jour 7</div>
+      <div><h3>Fête viking de Catoira</h3><p>À réserver au <strong>dimanche 2 août 2026</strong> si cette date correspond au séjour. Arriver tôt, se garer loin du site et rester sur les zones fermes avec le bébé et la personne âgée.</p><p class="why">L’un des choix les mieux notés, mais il ne faut pas ajouter d’autres visites ce jour-là.</p></div>
+    </div>
+
+    <div class="plan-alert"><strong>Règles pour permuter les jours :</strong> Ons exige une mer raisonnable ; A Curota et Cabo Vilán méritent un ciel dégagé ; Vimianzo et Dombate conviennent mieux par temps gris. Ne pas programmer le château un lundi. Si Catoira ne correspond pas aux dates du séjour, garder le jour 7 pour du repos, la plage ou Pontevedra/O Grove.</div>
+    <p class="src">Logistique : <a href="https://autorizacionillasatlanticas.xunta.gal" target="_blank" rel="noopener noreferrer">autorisation pour Ons</a> · <a href="https://catoira.gal/2026/07/02/romaria-vikinga-2026/" target="_blank" rel="noopener noreferrer">Fête viking 2026</a> · <a href="https://www.vimianzo.gal/turismo/info.php?id=129&amp;idioma=es&amp;sec=244" target="_blank" rel="noopener noreferrer">horaires du château de Vimianzo</a></p>
   </section>
 
   <section class="note"><strong>Critère de décision :</strong> priorité aux lieux proches de Carnota, avec de courtes promenades, des belvédères accessibles en voiture, des possibilités de pause et peu d’exigence physique. Ons est incluse comme “journée spéciale”, parce que vous avez envie de la découvrir, même si elle demande plus d’organisation.<div class="legend"><span class="pill high">Très recommandé</span><span class="pill medium">Optionnel</span><span class="pill special">Journée spéciale</span><span class="pill no">À écarter plutôt</span></div></section>
