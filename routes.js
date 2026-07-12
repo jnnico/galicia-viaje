@@ -1,25 +1,25 @@
 (function () {
-  var origin = "Pedrafigueira, Carnota, A Coruña";
+  var origin = "O Freixo, Outes, A Coruña";
   var pageUrl = "https://jnnico.github.io/galicia-viaje/#plan-dias";
   var isFrench = document.documentElement.lang === "fr";
   var routes = [
     {
-      es: "Carnota, hórreos de Carnota y Lira, Portocubelo y Caldebarcos",
-      fr: "Carnota, greniers de Carnota et Lira, Portocubelo et Caldebarcos",
-      waypoints: ["Hórreo de Carnota, A Coruña", "Hórreo de Lira, Carnota", "Portocubelo, Lira"],
-      destination: "Caldebarcos, Carnota"
+      es: "O Freixo, Noia, Ponte Nafonso y Central del Tambre",
+      fr: "O Freixo, Noia, Ponte Nafonso et centrale du Tambre",
+      waypoints: ["Porto do Freixo, Outes", "Noia, A Coruña", "Ponte Nafonso, Outes"],
+      destination: "Central Hidroeléctrica do Tambre, Outes"
     },
     {
-      es: "Ézaro, Corcubión y Muxía",
-      fr: "Ézaro, Corcubión et Muxía",
-      waypoints: ["Fervenza do Ézaro, Dumbría", "Miradoiro de Ézaro, Dumbría", "Corcubión, A Coruña"],
-      destination: "Santuario da Virxe da Barca, Muxía"
+      es: "Muros, Louro, Lariño, Lira y Carnota",
+      fr: "Muros, Louro, Lariño, Lira et Carnota",
+      waypoints: ["Porto de Muros, A Coruña", "Praia de Louro, Muros", "Faro de Lariño, Carnota"],
+      destination: "Hórreo de Carnota, A Coruña"
     },
     {
-      es: "Faro de Lariño, Louro y Muros",
-      fr: "Phare de Lariño, Louro et Muros",
-      waypoints: ["Faro de Lariño, Carnota", "Praia de Louro, Muros", "Porto de Muros, A Coruña"],
-      destination: origin
+      es: "Ézaro, Cee y Corcubión",
+      fr: "Ézaro, Cee et Corcubión",
+      waypoints: ["Fervenza do Ézaro, Dumbría", "Miradoiro de Ézaro, Dumbría", "Cee, A Coruña"],
+      destination: "Corcubión, A Coruña"
     },
     {
       es: "Vimianzo, Dombate, Cereixo, Camariñas y Cabo Vilán",
@@ -34,15 +34,15 @@
       destination: origin
     },
     {
-      es: "Noia, A Pobra y A Curota",
-      fr: "Noia, A Pobra et A Curota",
-      waypoints: ["Noia, A Coruña", "A Pobra do Caramiñal", "Miradoiro da Curota, A Pobra do Caramiñal"],
+      es: "A Pobra, A Curota, Rianxo y Hórreo do Araño",
+      fr: "A Pobra, A Curota, Rianxo et grenier d'O Araño",
+      waypoints: ["A Pobra do Caramiñal", "Miradoiro da Curota, A Pobra do Caramiñal", "Hórreo do Araño, Rianxo"],
       destination: origin
     },
     {
-      es: "Hórreo do Araño y Romería Vikinga de Catoira",
-      fr: "Grenier d'O Araño et Fête viking de Catoira",
-      waypoints: ["Hórreo do Araño, Rianxo", "Torres de Oeste, Catoira"],
+      es: "Romería Vikinga de Catoira",
+      fr: "Fête viking de Catoira",
+      waypoints: ["Torres de Oeste, Catoira"],
       destination: origin
     }
   ];
@@ -78,8 +78,8 @@
   if (intro) {
     var fullShare = document.createElement("div");
     var fullText = isFrench
-      ? "Programme familial de 7 jours en Galice depuis Pedrafigueira :\n" + pageUrl
-      : "Plan familiar de 7 días en Galicia desde Pedrafigueira:\n" + pageUrl;
+      ? "Programme familial de 7 jours en Galice depuis O Freixo :\n" + pageUrl
+      : "Plan familiar de 7 días en Galicia desde O Freixo:\n" + pageUrl;
     fullShare.className = "share-all";
     fullShare.innerHTML = '<a class="route-btn whatsapp" target="_blank" rel="noopener noreferrer">'
       + (isFrench ? "Partager le programme complet" : "Compartir el plan completo")
