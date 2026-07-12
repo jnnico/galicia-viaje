@@ -4,50 +4,50 @@
   var isFrench = document.documentElement.lang === "fr";
   var routes = [
     {
-      es: "O Freixo, Noia, Ponte Nafonso y Central del Tambre",
-      fr: "O Freixo, Noia, Ponte Nafonso et centrale du Tambre",
+      es: "Sábado 1: O Freixo, Noia, Ponte Nafonso y Central del Tambre",
+      fr: "Samedi 1er : O Freixo, Noia, Ponte Nafonso et centrale du Tambre",
       waypoints: ["Porto do Freixo, Outes", "Noia, A Coruña", "Ponte Nafonso, Outes"],
       destination: "Central Hidroeléctrica do Tambre, Outes"
     },
     {
-      es: "Muros, Louro, Lariño, Lira y Carnota",
-      fr: "Muros, Louro, Lariño, Lira et Carnota",
-      waypoints: ["Porto de Muros, A Coruña", "Praia de Louro, Muros", "Faro de Lariño, Carnota"],
-      destination: "Hórreo de Carnota, A Coruña"
-    },
-    {
-      es: "Ézaro, Cee y Corcubión",
-      fr: "Ézaro, Cee et Corcubión",
-      waypoints: ["Fervenza do Ézaro, Dumbría", "Miradoiro de Ézaro, Dumbría", "Cee, A Coruña"],
-      destination: "Corcubión, A Coruña"
-    },
-    {
-      es: "Vimianzo, Dombate, Cereixo, Camariñas y Cabo Vilán",
-      fr: "Vimianzo, Dombate, Cereixo, Camariñas et Cabo Vilán",
-      waypoints: ["Castelo de Vimianzo", "Dolmen de Dombate, Cabana de Bergantiños", "Porto de Cereixo, Vimianzo"],
-      destination: "Faro de Cabo Vilán, Camariñas"
-    },
-    {
-      es: "Puerto de Portonovo para visitar Ons",
-      fr: "Port de Portonovo pour visiter Ons",
-      waypoints: ["Porto de Portonovo, Sanxenxo"],
-      destination: origin
-    },
-    {
-      es: "A Pobra, A Curota, Rianxo y Hórreo do Araño",
-      fr: "A Pobra, A Curota, Rianxo et grenier d'O Araño",
-      waypoints: ["A Pobra do Caramiñal", "Miradoiro da Curota, A Pobra do Caramiñal", "Hórreo do Araño, Rianxo"],
-      destination: origin
-    },
-    {
-      es: "Romería Vikinga de Catoira",
-      fr: "Fête viking de Catoira",
+      es: "Domingo 2: Romería Vikinga de Catoira",
+      fr: "Dimanche 2 : fête viking de Catoira",
       waypoints: ["Catoira, Pontevedra"],
       destination: origin
     },
     {
-      es: "Festa do Pulpo de O Carballiño",
-      fr: "Festa do Pulpo d'O Carballiño",
+      es: "Lunes 3: Muros, Louro, Lariño, Lira y Carnota",
+      fr: "Lundi 3 : Muros, Louro, Lariño, Lira et Carnota",
+      waypoints: ["Porto de Muros, A Coruña", "Praia de Louro, Muros", "Faro de Lariño, Carnota"],
+      destination: "Hórreo de Carnota, A Coruña"
+    },
+    {
+      es: "Martes 4: Ézaro, Cee y Corcubión",
+      fr: "Mardi 4 : Ézaro, Cee et Corcubión",
+      waypoints: ["Fervenza do Ézaro, Dumbría", "Miradoiro de Ézaro, Dumbría", "Cee, A Coruña"],
+      destination: "Corcubión, A Coruña"
+    },
+    {
+      es: "Miércoles 5: Vimianzo, Dombate, Cereixo, Camariñas y Cabo Vilán",
+      fr: "Mercredi 5 : Vimianzo, Dombate, Cereixo, Camariñas et Cabo Vilán",
+      waypoints: ["Castelo de Vimianzo", "Dolmen de Dombate, Cabana de Bergantiños", "Porto de Cereixo, Vimianzo"],
+      destination: "Faro de Cabo Vilán, Camariñas"
+    },
+    {
+      es: "Jueves 6: puerto de Portonovo para visitar Ons",
+      fr: "Jeudi 6 : port de Portonovo pour visiter Ons",
+      waypoints: ["Porto de Portonovo, Sanxenxo"],
+      destination: origin
+    },
+    {
+      es: "Viernes 7: A Pobra, A Curota, Rianxo y Hórreo do Araño",
+      fr: "Vendredi 7 : A Pobra, A Curota, Rianxo et grenier d'O Araño",
+      waypoints: ["A Pobra do Caramiñal", "Miradoiro da Curota, A Pobra do Caramiñal", "Hórreo do Araño, Rianxo"],
+      destination: origin
+    },
+    {
+      es: "Sábado 8: víspera de la Festa do Pulpo de O Carballiño",
+      fr: "Samedi 8 : veille de la Festa do Pulpo d'O Carballiño",
       waypoints: ["O Carballiño, Ourense", "Parque Municipal do Carballiño, Ourense"],
       destination: origin
     }
@@ -84,8 +84,8 @@
   if (intro) {
     var fullShare = document.createElement("div");
     var fullText = isFrench
-      ? "Programme familial de 8 jours en Galice depuis O Freixo :\n" + pageUrl
-      : "Plan familiar de 8 días en Galicia desde O Freixo:\n" + pageUrl;
+      ? "Programme familial en Galice du 1er au 8 août depuis O Freixo :\n" + pageUrl
+      : "Plan familiar en Galicia del 1 al 8 de agosto desde O Freixo:\n" + pageUrl;
     fullShare.className = "share-all";
     fullShare.innerHTML = '<a class="route-btn whatsapp" target="_blank" rel="noopener noreferrer">'
       + (isFrench ? "Partager le programme complet" : "Compartir el plan completo")

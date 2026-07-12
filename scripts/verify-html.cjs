@@ -8,6 +8,9 @@ if (!routesSource.includes('var origin = "O Freixo, Outes, A Coruña"')) {
 if ((routesSource.match(/\n\s+es: /g) || []).length !== 8 || !routesSource.includes("Parque Municipal do Carballiño")) {
   throw new Error("routes.js: expected 8 routes including Festa do Pulpo");
 }
+if (routesSource.indexOf("Romería Vikinga de Catoira") > routesSource.indexOf("Lunes 3: Muros")) {
+  throw new Error("routes.js: Catoira must be the route for Sunday 2");
+}
 
 for (const file of ["index.html", "index-fr.html"]) {
   const html = fs.readFileSync(file, "utf8");
@@ -22,7 +25,8 @@ for (const file of ["index.html", "index-fr.html"]) {
   if (!html.includes("O Freixo") || html.includes("Pedrafigueira")) {
     throw new Error(`${file}: accommodation base is not updated`);
   }
-  if (!html.includes("O Carballiño") || !html.includes("8-9")) {
+  const mainPulpoDay = file === "index.html" ? "domingo 9" : "dimanche 9";
+  if (!html.includes("O Carballiño") || !html.includes(mainPulpoDay)) {
     throw new Error(`${file}: Festa do Pulpo day is not included`);
   }
   console.log(`${file}: OK`);
