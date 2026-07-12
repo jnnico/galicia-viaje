@@ -42,7 +42,7 @@
     {
       es: "Romería Vikinga de Catoira",
       fr: "Fête viking de Catoira",
-      waypoints: ["Torres de Oeste, Catoira"],
+      waypoints: ["Catoira, Pontevedra"],
       destination: origin
     },
     {
