@@ -44,6 +44,12 @@
       fr: "Fête viking de Catoira",
       waypoints: ["Torres de Oeste, Catoira"],
       destination: origin
+    },
+    {
+      es: "Festa do Pulpo de O Carballiño",
+      fr: "Festa do Pulpo d'O Carballiño",
+      waypoints: ["O Carballiño, Ourense", "Parque Municipal do Carballiño, Ourense"],
+      destination: origin
     }
   ];
 
@@ -78,8 +84,8 @@
   if (intro) {
     var fullShare = document.createElement("div");
     var fullText = isFrench
-      ? "Programme familial de 7 jours en Galice depuis O Freixo :\n" + pageUrl
-      : "Plan familiar de 7 días en Galicia desde O Freixo:\n" + pageUrl;
+      ? "Programme familial de 8 jours en Galice depuis O Freixo :\n" + pageUrl
+      : "Plan familiar de 8 días en Galicia desde O Freixo:\n" + pageUrl;
     fullShare.className = "share-all";
     fullShare.innerHTML = '<a class="route-btn whatsapp" target="_blank" rel="noopener noreferrer">'
       + (isFrench ? "Partager le programme complet" : "Compartir el plan completo")
