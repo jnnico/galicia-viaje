@@ -25,8 +25,8 @@ for (const file of ["index.html", "index-fr.html"]) {
   if (!html.includes("O Freixo") || html.includes("Pedrafigueira")) {
     throw new Error(`${file}: accommodation base is not updated`);
   }
-  const mainPulpoDay = file === "index.html" ? "domingo 9" : "dimanche 9";
-  if (!html.includes("O Carballiño") || !html.includes(mainPulpoDay)) {
+  const pulpoDates = file === "index.html" ? "sábado 8 y el domingo 9" : "samedi 8 et le dimanche 9";
+  if (!html.includes("O Carballiño") || !html.includes(pulpoDates)) {
     throw new Error(`${file}: Festa do Pulpo day is not included`);
   }
   console.log(`${file}: OK`);

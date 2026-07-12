@@ -46,8 +46,8 @@
       destination: origin
     },
     {
-      es: "Sábado 8: víspera de la Festa do Pulpo de O Carballiño",
-      fr: "Samedi 8 : veille de la Festa do Pulpo d'O Carballiño",
+      es: "Sábado 8: Festa do Pulpo de O Carballiño",
+      fr: "Samedi 8 : Festa do Pulpo d'O Carballiño",
       waypoints: ["O Carballiño, Ourense", "Parque Municipal do Carballiño, Ourense"],
       destination: origin
     }
