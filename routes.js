@@ -4,16 +4,25 @@
   var isFrench = document.documentElement.lang === "fr";
   var routes = [
     {
-      es: "Sábado 1: O Freixo, Noia, Ponte Nafonso y Central del Tambre",
-      fr: "Samedi 1er : O Freixo, Noia, Ponte Nafonso et centrale du Tambre",
-      waypoints: ["Porto do Freixo, Outes", "Noia, A Coruña", "Ponte Nafonso, Outes"],
-      destination: "Central Hidroeléctrica do Tambre, Outes"
+      es: "Sábado 1: Don Benito a Aveiro",
+      fr: "Samedi 1er : Don Benito vers Aveiro",
+      origin: "Don Benito, Badajoz",
+      waypoints: [],
+      destination: "Aveiro, Portugal"
     },
     {
-      es: "Domingo 2: Romería Vikinga de Catoira",
-      fr: "Dimanche 2 : fête viking de Catoira",
+      es: "Domingo 2: Aveiro, Catoira y O Freixo",
+      fr: "Dimanche 2 : Aveiro, Catoira et O Freixo",
+      origin: "Aveiro, Portugal",
       waypoints: ["Catoira, Pontevedra"],
-      destination: origin
+      destination: origin,
+      alternatives: [{
+        es: "Ruta directa Aveiro → O Freixo",
+        fr: "Trajet direct Aveiro → O Freixo",
+        origin: "Aveiro, Portugal",
+        waypoints: [],
+        destination: origin
+      }]
     },
     {
       es: "Lunes 3: Muros, Louro, Lariño, Lira y Carnota",
@@ -46,10 +55,22 @@
       destination: origin
     },
     {
-      es: "Sábado 8: Festa do Pulpo de O Carballiño",
-      fr: "Samedi 8 : Festa do Pulpo d'O Carballiño",
-      waypoints: ["O Carballiño, Ourense", "Parque Municipal do Carballiño, Ourense"],
+      es: "Sábado 8: Muxía y Mercado das Rutas do Mar",
+      fr: "Samedi 8 : Muxía et Mercado das Rutas do Mar",
+      waypoints: ["Muxía, A Coruña", "Santuario da Virxe da Barca, Muxía"],
       destination: origin
+    },
+    {
+      es: "Domingo 9: regreso a Don Benito, O Carballiño opcional",
+      fr: "Dimanche 9 : retour à Don Benito, O Carballiño en option",
+      waypoints: [],
+      destination: "Don Benito, Badajoz",
+      alternatives: [{
+        es: "Ruta por la Festa do Pulpo de O Carballiño",
+        fr: "Trajet par la Festa do Pulpo d'O Carballiño",
+        waypoints: ["Parque Municipal do Carballiño, Ourense"],
+        destination: "Don Benito, Badajoz"
+      }]
     }
   ];
 
@@ -76,6 +97,20 @@
       + "</a>";
     actions.querySelector(".maps").href = mapsUrl;
     actions.querySelector(".whatsapp").href = "https://wa.me/?text=" + encodeURIComponent(shareText);
+    (route.alternatives || []).forEach(function (alternative) {
+      var alternativeUrl = buildMapsUrl(alternative);
+      var alternativeLabel = isFrench ? alternative.fr : alternative.es;
+      var alternativeLink = document.createElement("a");
+      alternativeLink.className = "route-btn maps";
+      alternativeLink.target = "_blank";
+      alternativeLink.rel = "noopener noreferrer";
+      alternativeLink.href = alternativeUrl;
+      alternativeLink.textContent = alternativeLabel;
+      alternativeLink.title = alternativeLabel;
+      actions.insertBefore(alternativeLink, actions.querySelector(".whatsapp"));
+      shareText += "\n\n" + alternativeLabel + ": " + alternativeUrl;
+    });
+    actions.querySelector(".whatsapp").href = "https://wa.me/?text=" + encodeURIComponent(shareText);
     dayPlan.querySelector("div:last-child").appendChild(actions);
   });
 
@@ -84,8 +119,8 @@
   if (intro) {
     var fullShare = document.createElement("div");
     var fullText = isFrench
-      ? "Programme familial en Galice du 1er au 8 août depuis O Freixo :\n" + pageUrl
-      : "Plan familiar en Galicia del 1 al 8 de agosto desde O Freixo:\n" + pageUrl;
+      ? "Voyage familial du 1er au 9 août, avec séjour en Galice du 2 au 9 :\n" + pageUrl
+      : "Viaje familiar del 1 al 9 de agosto, con estancia en Galicia del 2 al 9:\n" + pageUrl;
     fullShare.className = "share-all";
     fullShare.innerHTML = '<a class="route-btn whatsapp" target="_blank" rel="noopener noreferrer">'
       + (isFrench ? "Partager le programme complet" : "Compartir el plan completo")
@@ -97,7 +132,7 @@
   function buildMapsUrl(route) {
     var params = new URLSearchParams({
       api: "1",
-      origin: origin,
+      origin: route.origin || origin,
       destination: route.destination,
       travelmode: "driving"
     });
