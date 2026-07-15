@@ -12,6 +12,13 @@ if ((routesSource.match(/\n {6}es: /g) || []).length !== 9) {
 if (!routesSource.includes("Aveiro, Portugal") || !routesSource.includes("Parque Municipal do Carballiño")) {
   throw new Error("routes.js: outbound and optional return stops are missing");
 }
+const muxiaRoute = routesSource.match(/es: "Sábado 8[\s\S]*?(?=\n    \{\n      es: "Domingo 9)/);
+if (!muxiaRoute || !muxiaRoute[0].includes("Praia de Lourido") || !muxiaRoute[0].includes("Praia de Moreira") || !muxiaRoute[0].includes("Faro de Cabo Touriñán") || !muxiaRoute[0].includes("Tramo costero Muxía")) {
+  throw new Error("routes.js: expected the safe Muxía to Touriñán driving route");
+}
+if (/waypoints: \[[^\]]*Buitra/.test(muxiaRoute[0])) {
+  throw new Error("routes.js: Punta da Buitra must not be used as a driving waypoint");
+}
 if (routesSource.indexOf("Domingo 2: Aveiro") > routesSource.indexOf("Lunes 3: Muros")) {
   throw new Error("routes.js: arrival through Catoira must precede the Monday plan");
 }
@@ -29,7 +36,8 @@ for (const file of ["index.html", "index-fr.html"]) {
   if (!html.includes("O Freixo") || !html.includes("Aveiro") || html.includes("Pedrafigueira")) {
     throw new Error(`${file}: accommodation or outbound route is not updated`);
   }
-  if (!html.includes("Mercado das Rutas do Mar") || !html.includes("O Carballiño")) {
+  const hasTourinan = html.includes("Faro Touriñán") || html.includes("phare de Touriñán");
+  if (!html.includes("Mercado das Rutas do Mar") || !hasTourinan || !html.includes("O Carballiño")) {
     throw new Error(`${file}: Muxía market or optional Festa do Pulpo is missing`);
   }
   const dateRange = file === "index.html" ? "domingo 2 al domingo 9" : "dimanche 2 au dimanche 9";

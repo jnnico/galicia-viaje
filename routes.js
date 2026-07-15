@@ -55,10 +55,17 @@
       destination: origin
     },
     {
-      es: "Sábado 8: Muxía y Mercado das Rutas do Mar",
-      fr: "Samedi 8 : Muxía et Mercado das Rutas do Mar",
-      waypoints: ["Muxía, A Coruña", "Santuario da Virxe da Barca, Muxía"],
-      destination: origin
+      es: "Sábado 8: Muxía, costa de A Buitra y Faro Touriñán",
+      fr: "Samedi 8 : Muxía, côte d'A Buitra et phare de Touriñán",
+      waypoints: ["Muxía, A Coruña", "Santuario da Virxe da Barca, Muxía", "Praia de Lourido, Muxía", "Praia de Moreira, Muxía", "Faro de Cabo Touriñán, Muxía"],
+      destination: origin,
+      alternatives: [{
+        es: "Tramo costero Muxía → Touriñán",
+        fr: "Tronçon côtier Muxía → Touriñán",
+        origin: "Muxía, A Coruña",
+        waypoints: ["Praia de Lourido, Muxía", "Praia de Moreira, Muxía"],
+        destination: "Faro de Cabo Touriñán, Muxía"
+      }]
     },
     {
       es: "Domingo 9: regreso a Don Benito, O Carballiño opcional",
