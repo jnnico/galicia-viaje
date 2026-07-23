@@ -3,8 +3,8 @@ const fs = require("fs");
 new Function(fs.readFileSync("routes.js", "utf8"));
 const routesSource = fs.readFileSync("routes.js", "utf8");
 
-if (!routesSource.includes('var origin = "O Freixo, Outes, A Coruña"')) {
-  throw new Error("routes.js: expected O Freixo as the local route origin");
+if (!routesSource.includes('var origin = "C/Vilariño 32, 15288 Freixo-Outes, A Coruña"')) {
+  throw new Error("routes.js: expected the exact Freixo-Outes address as the local route origin");
 }
 if ((routesSource.match(/\n {6}es: /g) || []).length !== 9) {
   throw new Error("routes.js: expected 9 dated routes from August 1 to 9");
@@ -35,6 +35,9 @@ for (const file of ["index.html", "index-fr.html"]) {
   }
   if (!html.includes("O Freixo") || !html.includes("Aveiro") || html.includes("Pedrafigueira")) {
     throw new Error(`${file}: accommodation or outbound route is not updated`);
+  }
+  if (!html.includes("C/Vilariño 32, 15288 Freixo-Outes") || !html.includes("https://maps.app.goo.gl/nzNMw6K5bdHD861WA")) {
+    throw new Error(`${file}: exact accommodation address or Google Maps link is missing`);
   }
   const hasTourinan = html.includes("Faro Touriñán") || html.includes("phare de Touriñán");
   if (!html.includes("Mercado das Rutas do Mar") || !hasTourinan || !html.includes("O Carballiño")) {

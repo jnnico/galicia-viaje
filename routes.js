@@ -1,5 +1,5 @@
 (function () {
-  var origin = "O Freixo, Outes, A Coruña";
+  var origin = "C/Vilariño 32, 15288 Freixo-Outes, A Coruña";
   var pageUrl = "https://jnnico.github.io/galicia-viaje/#plan-dias";
   var isFrench = document.documentElement.lang === "fr";
   var routes = [

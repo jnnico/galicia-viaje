@@ -1,6 +1,6 @@
 # Galicia Viaje
 
-Pagina familiar con un plan de 8 dias, votacion compartida y rutas desde O Freixo, Outes.
+Pagina familiar con un plan de 8 dias, votacion compartida y rutas desde C/Vilariño 32, Freixo-Outes.
 
 Pagina publicada:
 
